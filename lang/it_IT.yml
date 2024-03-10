@@ -1,0 +1,7 @@
+#ITALIAN LANGUAGE FOR TELEGRAM BOTS
+#CREDITI: @ali3n07
+Lang:
+  selected: "Lingua selezionata: Italiano 🇮🇹"
+Commands:
+  rotateScreen:
+    success: "Schermo ruotato!"
