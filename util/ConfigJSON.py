@@ -1,7 +1,7 @@
 import json
 
-def token():
 
+def token():
     try:
 
         with open("config.json", "r+") as config:
@@ -24,7 +24,7 @@ def token():
 
     except FileNotFoundError:
         print(f"The config file doesn't exist.\nGenerating it...")
-        #TODO Scarica file dalla repo
+        # TODO Scarica file dalla repo
 
     config.close()
 

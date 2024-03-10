@@ -44,7 +44,7 @@ async def LangMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Please choose the language you want to view messages:", reply_markup=reply_markup)
+    await update.message.reply_text(await Translate(update, context, update.effective_user.username, "Commands.Lang.ChooseLang"), reply_markup=reply_markup)
 
 
 async def LangButtons(update: Update, context: ContextTypes.DEFAULT_TYPE, ):
@@ -63,14 +63,8 @@ async def LangButtons(update: Update, context: ContextTypes.DEFAULT_TYPE, ):
             if user["username"] == sender:
                 user["lang"] = query.data
                 break
-            else:
-                data['users'].append({
-                    "username": sender,
-                    "lang": query.data
-                })
 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=4)
-    await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text=await Translate(update, context, sender=sender, yamlpath="Lang.selected"))
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=await Translate(update, context, sender=sender, yamlpath="Commands.Lang.selected"))
