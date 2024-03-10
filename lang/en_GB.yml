@@ -1,0 +1,16 @@
+#ENGLISH LANGUAGE FOR TELEGRAM BOTS
+#CREDITS: @ali3n07, @atlantisbis
+Commands:
+rotateScreen:
+success: "Screen rotated!"
+rotationTimesError1: "The number of rotations must be expressed with a number! E.g., 1, 2, 3, etc."
+rotationTimesError2: "The number of rotations cannot be greater than 100 or less than or equal to 0."
+rotationDegreesError2: "The entered degrees are incorrect! Please enter 0, 90, 180, 270."
+rotationDegreesError1: "Degrees must be expressed with a number! Ex.., 1, 2, 3, etc."
+rotationDelayError1: "The entered value is not a number. Ex.., 1, 2, 3, etc.."
+whitelist:
+UserNotAllowed: "You are not authorized to execute this command."
+UserAdded: "User added: "
+Lang:
+selected: "Selected language: English ᴇɴ"
+ChooseLang: "Please choose the language you want to view messages:"
