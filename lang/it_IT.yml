@@ -3,14 +3,22 @@
 Commands:
   rotateScreen:
     success: "Schermo ruotato!"
-    rotationTimesError1: "Il numnero di rotazioni deve essere espresso con un numero! Es. 1,2,3 ecc.."
-    rotationTimesError2: "Il numero di rotazioni non può essere superiore di 100 o minore o uguale a 0"
-    rotationDegreesError2: "I gradi inseriti non sono corretti! Inserisci 0, 90, 180, 270"
-    rotationDegreesError1: "I gradi devono essere espressi con un numero! Es. 1,2,3 ecc.."
-    rotationDelayError1: "Il valore inserito non è un numero"
+    rotationTimesError1: "*Il numero di rotazioni deve essere espresso con un numero\\!*"
+    rotationTimesError2: "*Il numero di rotazioni non può essere superiore di 100 o minore uguale a 0*"
+    rotationDegreesError2: "*I gradi inseriti non sono corretti\\! (Numeri validi 0, 90, 180, 270)*"
+    rotationDegreesError1: "*I gradi devono essere espressi con un numero\\!*"
+    rotationDelayError1: "*Il valore inserito non è un numero*"
   whitelist:
-    UserNotAllowed: "Non sei autorizzato a eseguire questo comando"
-    UserAdded: "Aggiunto l'utente "
+    userNotAllowed: "Non sei autorizzato a eseguire questo comando"
+    userAdded: "Aggiunto l'utente "
+    usersAdded: "Aggiunti gli utenti: "
+    noUserAdded: "Nessun utente aggiunto"
+    userWhitelisted: "Utenti in *whitelist*: "
   Lang:
     selected: "Lingua selezionata: Italiano 🇮🇹"
-    ChooseLang: "Please choose the language you want to view messages:"
+    chooseLang: "Please choose the language you want to view messages:"
+  Video:
+    chooseVideo: "Scegli un video da questa lista di pulsanti:"
+    errorQuery: "Errore nel ricevimento del video selezionato... Riprova a eseguire il comando!"
+    selected: "Video selezionato: "
+    errorUrl: "Non puoi immettere più links!"

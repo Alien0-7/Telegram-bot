@@ -2,7 +2,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, CallbackQuer
 from telegram import Update
 
 from util import ConfigJSON, Lang, Whitelist
-from commands import rotate
+from commands import rotate, video, fakeError
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -18,14 +18,18 @@ app = Application.builder().token(ConfigJSON.token()).build()
 
 # Command
 app.add_handler(CommandHandler("start", start))
+#app.add_handler(CommandHandler("update", ))
 app.add_handler(CommandHandler("rotate", rotate.rotate))
 app.add_handler(CommandHandler("lang", Lang.LangMessage))
+app.add_handler(CommandHandler("error", fakeError.winerror))
+app.add_handler(CommandHandler("video", video.links))
 app.add_handler(CommandHandler("whitelist", Whitelist.Whitelist))
 
 # Buttons
-app.add_handler(CallbackQueryHandler(Lang.LangButtons))
+app.add_handler(CallbackQueryHandler(Lang.LangButtons, pattern='^(it_IT|en_GB)$'))
+app.add_handler(CallbackQueryHandler(video.linksButtons, pattern='^(1|2|3|4)$'))
 
 # Error
 app.add_error_handler(error)
 
-app.run_polling(poll_interval=3, allowed_updates=Update.ALL_TYPES)
+app.run_polling()

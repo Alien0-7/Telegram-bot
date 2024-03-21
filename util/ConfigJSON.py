@@ -20,12 +20,11 @@ def token():
                 json.dump(data, config)
                 config.truncate()
 
+            config.close()
 
 
     except FileNotFoundError:
         print(f"The config file doesn't exist.\nGenerating it...")
         # TODO Scarica file dalla repo
-
-    config.close()
 
     return data["token"]

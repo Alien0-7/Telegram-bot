@@ -1,6 +1,8 @@
-from telegram.ext import ContextTypes
-from telegram import Update
 import json
+
+from telegram import Update
+from telegram.constants import ParseMode
+from telegram.ext import ContextTypes
 
 from util.Lang import Translate
 
@@ -23,6 +25,13 @@ async def NotAllowed(sender):
 
 
 async def Whitelist(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+    sender = update.effective_user.username
+
+    if await NotAllowed(sender):
+        await update.message.reply_text(await Translate(update, context, sender, "Commands.whitelist.userNotAllowed"))
+        return False
+
     with (open("config.json", 'r+') as file):
         data = json.load(file)
         userListStr = ""
@@ -43,9 +52,9 @@ async def Whitelist(update: Update, context: ContextTypes.DEFAULT_TYPE):
             file.truncate()
 
             if usersAdded == 1:
-                userListStr = await Translate(update, context, update.effective_user.username, "Commands.whitelist.UserAdded") + userListStr
+                userListStr = await Translate(update, context, update.effective_user.username, "Commands.whitelist.userAdded") + userListStr
             elif usersAdded > 1:
-                userListStr = await Translate(update, context, update.effective_user.username, "Commands.whitelist.UsersAdded") + userListStr
+                userListStr = await Translate(update, context, update.effective_user.username, "Commands.whitelist.usersAdded") + userListStr
             else:
                 await update.message.reply_text(await Translate(update, context, update.effective_user.username, "Commands.whitelist.noUserAdded"))
 
@@ -56,4 +65,9 @@ async def Whitelist(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
         else:
-            await update.message.reply_text(await Translate(update, context, update.effective_user.username, "Command.whitelist.noUserSelected"))
+            whitelist = await Translate(update, context, sender, "Commands.whitelist.userWhitelisted")
+            for user in data["users"]:
+                whitelist += ("\n \\- " + user["username"])
+
+            await update.message.reply_text(whitelist, parse_mode=ParseMode.MARKDOWN_V2)
+
