@@ -1,6 +1,10 @@
 {
-    "token": "PASTE_YOUR_TOKEN_HERE",
+    "token": "7027883188:AAG70Yt4jlDhQFHFxHt6iWfl4UbV6Wu9wo8",
     "users": [
+        {
+            "username": "atlantisbis",
+            "lang": "it_IT"
+        },
         {
             "username": "ali3n07",
             "lang": "it_IT"

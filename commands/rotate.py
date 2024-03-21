@@ -1,9 +1,11 @@
-import util.Whitelist
-from util.Lang import Translate
-import rotatescreen
-import time
+from telegram.constants import ParseMode
 from telegram import Update
 from telegram.ext import ContextTypes
+
+from util.Lang import Translate
+import util.Whitelist
+import rotatescreen
+import time
 
 
 async def rotate(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -23,21 +25,25 @@ async def rotate(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if len(context.args) >= 1:
         if context.args[0].isnumeric():
-            #if not (int(context.args[0]) > 100 or int(context.args[0]) <= 0):
-            rotationTimes = round(float(context.args[0])) + 1
-            #else:
-                #await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationTimesError2"))
+            if not (int(context.args[0]) > 100 or int(context.args[0]) <= 0):
+                rotationTimes = round(float(context.args[0])) + 1
+            else:
+                await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationTimesError2"))
+                return False
         else:
-            await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationTimesError1"))
+            await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationTimesError1"), parse_mode=ParseMode.MARKDOWN_V2)
+            return False
 
     if len(context.args) >= 2:
         if context.args[1].isnumeric():
             if int(context.args[1]) != 0 or int(context.args[1]) != 90 or int(context.args[1]) != 180 or int(context.args[1]) != 270:
                 rotationDegrees = round(float(context.args[1]))
             else:
-                await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDegreesError2"))
+                await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDegreesError2"), parse_mode=ParseMode.MARKDOWN_V2)
+                return False
         else:
-            await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDegreesError1"))
+            await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDegreesError1"), parse_mode=ParseMode.MARKDOWN_V2)
+            return False
 
     if len(context.args) >= 3:
         try:
@@ -46,7 +52,8 @@ async def rotate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 rotationDelay = int(context.args[2])
             except ValueError:
-                await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDelayError1"))
+                await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.rotationDelayError1"), parse_mode=ParseMode.MARKDOWN_V2)
+                return False
 
     for i in range(1, rotationTimes):
         j = 0
@@ -58,3 +65,4 @@ async def rotate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         time.sleep(rotationDelay)
 
     await update.message.reply_text(await Translate(update, context, sender, "Commands.rotateScreen.success"))
+    return True
