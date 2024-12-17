@@ -42,20 +42,20 @@ async def Translate(update: Update, context: ContextTypes.DEFAULT_TYPE, sender=N
 async def LangMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sender = update.effective_user.username
 
-    if await util.Whitelist.NotAllowed(sender):
+    if not await util.whitelist.allowed(sender):
         await update.message.reply_text(await Translate(update, context, sender, "Commands.whitelist.userNotAllowed"))
         return False
 
     keyboard = [
         [
-            InlineKeyboardButton("Italiano 🇮🇹", callback_data=str("it_IT")),
-            InlineKeyboardButton("English 🇬🇧", callback_data=str("en_GB")),
+            InlineKeyboardButton("Italiano 🇮🇹", callback_data=str("lang:it_IT")),
+            InlineKeyboardButton("English 🇬🇧", callback_data=str("lang:en_GB")),
         ],
         #        [InlineKeyboardButton("Option 3", callback_data="3")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(await Translate(update, context, update.effective_user.username, "Commands.Lang.chooseLang"), reply_markup=reply_markup)
+    await update.message.reply_text(await Translate(update, context, update.effective_user.username, "Commands.lang.chooseLang"), reply_markup=reply_markup)
 
 
 async def LangButtons(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -72,10 +72,10 @@ async def LangButtons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         for user in data['users']:
             if user["username"] == sender:
-                user["lang"] = query.data
+                user["lang"] = query.data.replace("lang:", "")
                 break
 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=4)
-    await context.bot.send_message(update.effective_chat.id, await Translate(update, context, sender, "Commands.Lang.selected"))
+    await context.bot.send_message(update.effective_chat.id, await Translate(update, context, sender, "Commands.lang.selected"))

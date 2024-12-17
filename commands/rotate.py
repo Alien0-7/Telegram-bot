@@ -2,8 +2,8 @@ from telegram.constants import ParseMode
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from util.Lang import Translate
-import util.Whitelist
+from util.lang import Translate
+import util.whitelist
 import rotatescreen
 import time
 
@@ -16,7 +16,7 @@ async def rotate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sender = update.effective_user.username
     start_pos = []
 
-    if await util.Whitelist.NotAllowed(sender):
+    if not await util.whitelist.allowed(sender):
         await update.message.reply_text(await Translate(update, context, sender, "Commands.whitelist.UserNotAllowed"))
         return False
 

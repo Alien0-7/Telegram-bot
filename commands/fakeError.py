@@ -4,7 +4,7 @@ import shlex
 from telegram.ext import ContextTypes
 from telegram import Update
 
-from util.Lang import Translate
+from util.lang import Translate
 
 
 async def winerror(update: Update, context: ContextTypes.DEFAULT_TYPE):

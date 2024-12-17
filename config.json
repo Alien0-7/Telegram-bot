@@ -1,0 +1,12 @@
+{
+    "token": "TOKEN",
+    "users": [
+        {
+            "username": "ali3n07",
+            "is_op": true,
+            "lang": "en_GB",
+            "debugMode": false
+        }
+    ],
+    "version": "v1.0"
+}

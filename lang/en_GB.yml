@@ -14,11 +14,20 @@ Commands:
     usersAdded: "Aggiunti gli utenti: "
     noUserAdded: "Nessun utente aggiunto"
     userWhitelisted: "Utenti in *whitelist*: "
-  Lang:
+    removeFromWhitelist: "Remove from the whitelist the users:"
+    removedSuccessfully: "Removed the user successfully"
+    removedUnsuccessfully: "user not found in whitelist"
+  lang:
     selected: "Selected language: English ᴇɴ"
     chooseLang: "Please choose the language you want to view messages:"
-  Video:
+  video:
     chooseVideo: "Scegli un video da questa lista di pulsanti:"
     errorQuery: "Errore nel ricevimento del video selezionato... Riprova a eseguire il comando!"
     selected: "Video selezionato!"
     errorUrl: "Non puoi immettere più links!"
+  debug:
+    selected: "Debug mode toggled to: "
+  update:
+    getDownloadUrl: "Getting url(s) of newest file(s)"
+    downloadFiles: "Downloading new files"
+    halfUpdate: "trying to close the .exe file and restart with the newest .exe"
